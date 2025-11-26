@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import './Login.css';
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -22,50 +23,75 @@ export default function Login() {
   };
 
   return (
-    <div className="form-container fade-in">
-      <h2 className="form-title">Welcome Back</h2>
-      <p className="text-center mb-4" style={{ color: '#666' }}>
-        Sign in to your account to continue
-      </p>
-      
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input 
-            type="email"
-            placeholder="Email address" 
-            className="form-input"
-            value={form.email}
-            onChange={e => setForm({ ...form, email: e.target.value })}
-            required
-          />
+    <div className="auth-page">
+      <div className="auth-background">
+        <div className="auth-shapes">
+          <div className="shape shape-1"></div>
+          <div className="shape shape-2"></div>
+          <div className="shape shape-3"></div>
+          <div className="shape shape-4"></div>
         </div>
-        
-        <div className="form-group">
-          <input 
-            type="password"
-            placeholder="Password" 
-            className="form-input"
-            value={form.password}
-            onChange={e => setForm({ ...form, password: e.target.value })}
-            required
-          />
-        </div>
-        
-        <button 
-          type="submit" 
-          className="form-button"
-          disabled={loading}
-        >
-          {loading ? 'Signing in...' : 'Sign In'}
-        </button>
-      </form>
+      </div>
       
-      <p className="text-center mt-3" style={{ color: '#666' }}>
-        Don't have an account?{' '}
-        <Link to="/signup" style={{ color: '#667eea', fontWeight: '600' }}>
-          Sign up here
-        </Link>
-      </p>
+      <div className="auth-container">
+        <div className="auth-card fade-in">
+          <div className="auth-header">
+            <div className="auth-icon">🔐</div>
+            <h2 className="auth-title">Welcome Back</h2>
+            <p className="auth-subtitle">
+              Sign in to your account to continue your collaboration journey
+            </p>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="input-group">
+              <div className="input-icon">📧</div>
+              <input 
+                type="email"
+                placeholder="Email address" 
+                className="auth-input"
+                value={form.email}
+                onChange={e => setForm({ ...form, email: e.target.value })}
+                required
+              />
+            </div>
+            
+            <div className="input-group">
+              <div className="input-icon">🔒</div>
+              <input 
+                type="password"
+                placeholder="Password" 
+                className="auth-input"
+                value={form.password}
+                onChange={e => setForm({ ...form, password: e.target.value })}
+                required
+              />
+            </div>
+            
+            <button 
+              type="submit" 
+              className="auth-button"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <div className="spinner"></div>
+                  Signing in...
+                </>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </form>
+          
+          <div className="auth-footer">
+            <p>Don't have an account?</p>
+            <Link to="/signup" className="auth-link">
+              Create your account
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

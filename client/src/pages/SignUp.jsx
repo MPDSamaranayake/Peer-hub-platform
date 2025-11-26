@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import './SignUp.css';
 
 export default function Signup() {
   const { signup } = useContext(AuthContext);
@@ -22,74 +23,102 @@ export default function Signup() {
   };
 
   return (
-    <div className="form-container fade-in">
-      <h2 className="form-title">Join PeerHub</h2>
-      <p className="text-center mb-4" style={{ color: '#666' }}>
-        Create your account and start collaborating
-      </p>
+    <div className="auth-page">
+      <div className="auth-background signup-bg">
+        <div className="auth-shapes">
+          <div className="shape shape-1"></div>
+          <div className="shape shape-2"></div>
+          <div className="shape shape-3"></div>
+          <div className="shape shape-4"></div>
+          <div className="shape shape-5"></div>
+        </div>
+      </div>
       
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input 
-            type="text"
-            placeholder="Full Name" 
-            className="form-input"
-            value={form.name}
-            onChange={e => setForm({ ...form, name: e.target.value })}
-            required
-          />
+      <div className="auth-container">
+        <div className="auth-card fade-in">
+          <div className="auth-header">
+            <div className="auth-icon">🚀</div>
+            <h2 className="auth-title">Join PeerHub</h2>
+            <p className="auth-subtitle">
+              Create your account and start building amazing projects together
+            </p>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="input-group">
+              <div className="input-icon">👤</div>
+              <input 
+                type="text"
+                placeholder="Full Name" 
+                className="auth-input"
+                value={form.name}
+                onChange={e => setForm({ ...form, name: e.target.value })}
+                required
+              />
+            </div>
+            
+            <div className="input-group">
+              <div className="input-icon">📧</div>
+              <input 
+                type="email"
+                placeholder="Email address" 
+                className="auth-input"
+                value={form.email}
+                onChange={e => setForm({ ...form, email: e.target.value })}
+                required
+              />
+            </div>
+            
+            <div className="input-group">
+              <div className="input-icon">🔒</div>
+              <input 
+                type="password"
+                placeholder="Password" 
+                className="auth-input"
+                value={form.password}
+                onChange={e => setForm({ ...form, password: e.target.value })}
+                required
+              />
+            </div>
+            
+            <div className="input-group">
+              <div className="input-icon">🛠️</div>
+              <input 
+                type="text"
+                placeholder="Skills (e.g., React, Python, Design)" 
+                className="auth-input"
+                value={form.skills}
+                onChange={e => setForm({ ...form, skills: e.target.value })}
+              />
+              <small className="input-help">
+                Enter your skills separated by commas
+              </small>
+            </div>
+            
+            <button 
+              type="submit" 
+              className="auth-button"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <div className="spinner"></div>
+                  Creating account...
+                </>
+              ) : (
+                'Create Account'
+              )}
+            </button>
+          </form>
+          
+          <div className="auth-footer">
+            <p>Already have an account?</p>
+            <Link to="/login" className="auth-link">
+              Sign in here
+            </Link>
+          </div>
         </div>
-        
-        <div className="form-group">
-          <input 
-            type="email"
-            placeholder="Email address" 
-            className="form-input"
-            value={form.email}
-            onChange={e => setForm({ ...form, email: e.target.value })}
-            required
-          />
-        </div>
-        
-        <div className="form-group">
-          <input 
-            type="password"
-            placeholder="Password" 
-            className="form-input"
-            value={form.password}
-            onChange={e => setForm({ ...form, password: e.target.value })}
-            required
-          />
-        </div>
-        
-        <div className="form-group">
-          <input 
-            type="text"
-            placeholder="Skills (e.g., React, Python, Design)" 
-            className="form-input"
-            value={form.skills}
-            onChange={e => setForm({ ...form, skills: e.target.value })}
-          />
-          <small style={{ color: '#666', fontSize: '0.9rem' }}>
-            Enter your skills separated by commas
-          </small>
-        </div>
-        
-        <button 
-          type="submit" 
-          className="form-button"
-          disabled={loading}
-        >
-          {loading ? 'Creating account...' : 'Create Account'}
-        </button>
-      </form>
-      
-      <p className="text-center mt-3" style={{ color: '#666' }}>
-        Already have an account?{' '}
-        <Link to="/login" style={{ color: '#667eea', fontWeight: '600' }}>
-          Sign in here
-        </Link>
-      </p>
+      </div>
     </div>
   );
 }
