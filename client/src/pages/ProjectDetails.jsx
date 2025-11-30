@@ -16,17 +16,20 @@ export default function ProjectDetails() {
     alert("Request Sent!");
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { 
+    api.get(`/projects/${id}`).then((res) => setProject(res.data));}, [id]);
 
   if (!project) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>{project.title}</h1>
+    <div style={{ padding: "20px" }}>
+      <h2>{project.title}</h2>
       <p>{project.description}</p>
+      <p><b>Skills:</b> {project.skills.join(", ")}</p>
+      <p><b>Type:</b> {project.type}</p>
 
       <button onClick={sendJoin}>Join Project</button>
-
+          
       <h3>Required Skills:</h3>
       <ul>
         {project.requiredSkills.map(s => <li>{s}</li>)}

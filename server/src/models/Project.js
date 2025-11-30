@@ -6,6 +6,8 @@ const ProjectSchema = new mongoose.Schema({
   requiredSkills: { type: [String], required: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   collaborators: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  type: { type: String, required: true },
+  github: { type: String },
   joinRequests: [{
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     status: { type: String, enum: ["pending", "accepted", "rejected"], default: "pending" }
